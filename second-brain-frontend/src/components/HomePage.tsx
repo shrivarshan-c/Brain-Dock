@@ -18,8 +18,9 @@ export const HomePage = () => {
             <span className="border-4 border-red-400 px-3 py-1 rounded-3xl inline-block mt-2">
               Dock your ideas.
             </span>
+         {//home page
+}
 
-            {/* Cursor icon OUTSIDE the span, but next to it */}
             <div className="mt-2 animate-bounce">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
