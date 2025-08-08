@@ -35,7 +35,8 @@ export const CreateContent=({model,setModel}:modelType)=>{
     const [selectedOption, setSelectedOption] = useState<any>(options[0]);
     const titleRef=useRef<HTMLInputElement>();
     const linkRef=useRef<HTMLInputElement>();
- ;
+    const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
+ 
     const descriptionRef= useRef<HTMLInputElement>();
 
     async function addContent()
