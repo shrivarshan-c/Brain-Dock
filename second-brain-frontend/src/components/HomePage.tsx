@@ -52,6 +52,13 @@ export const HomePage = () => {
           className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl rounded-2xl shadow-xl border-2 border-transparent p-1"
         />
       </div>
+
+      <div className="fixed bottom-4 right-4 bg-slate-200 border-4 border-black w-60 justify-center p-4 rounded-lg shadow-lg z-50">
+  <p className="font-bold">Test it using</p>
+  <p><span className='bg-red-300'>Username</span> varshan</p>
+  <p><span className='bg-red-300'>Password</span> varshan</p>
+</div>
+
     </div>
   );
 };

@@ -100,9 +100,8 @@ if(props.type=="youtube")
 
 
         <div className="px-6 py-4">
-          <span className="tag">#photography</span>
-          <span className="tag">#travel</span>
-          <span className="tag">#winter</span>
+          <span className="tag">{props.title}</span>
+     
         </div>
       </div>
     </div>
