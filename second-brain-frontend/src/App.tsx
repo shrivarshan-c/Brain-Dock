@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Navigate, Route, Router, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Router, Routes, useNavigate } from "react-router-dom"
 import { Dashboard } from "./components/Dashboard"
 import { SignUp } from "./components/SignUp"
 import { SignIn } from "./components/SignIn"
@@ -11,38 +11,38 @@ import { DocumentComponent } from "./components/DocumentComponent"
 import { AllContents } from "./components/AllContents"
 import { HomePage } from "./components/HomePage"
 import { SharedComponent } from "./components/sharedComponent"
+import { PrivateRoute } from "./components/PrivateRoutes"
+import { useEffect } from "react"
 function App() {
 
-    const token = localStorage.getItem("token");
+
 
 return (
   <>
   <div className="">
-
-<BrowserRouter>
 
 <Routes>
 
 <Route path="/" element={<HomePage/>}/>
    <Route path="/signup" element={<SignUp/>}/>
    <Route path="/signin" element={<SignIn/>}/>
- {token ? <>
 
-    <Route path="/dashboard" element={<Dashboard/>}>
+
+    <Route path="/dashboard" element={
+        <PrivateRoute>
+
+
+        <Dashboard/>
+        </PrivateRoute>}>
 
       <Route index element={<AllContents/>}/>
     <Route path="youtube" element={<YoutubeComponent/>}/>
     <Route path="twitter" element={<TwitterComponent/>}/>
     <Route path="document" element={<DocumentComponent/>}/>
  </Route>
- </>:(
-    toast.error("user not signed In "),
-    <Route path="*" element={<Navigate to="/signin"></Navigate>}/>)
-
-}
 <Route path="/share/:shareLink" element={<SharedComponent/>} />
 </Routes>
-</BrowserRouter>
+
 </div>
 <ToastContainer />
 

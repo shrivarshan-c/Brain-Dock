@@ -37,7 +37,7 @@ export function SignIn()
         {
 
             toast.success(notemess);
-            navigate("/dashboard");
+            navigate("/dashboard",{replace:true});
 
         }
         else

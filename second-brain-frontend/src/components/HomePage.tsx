@@ -54,7 +54,7 @@ export const HomePage = () => {
         />
       </div>
 
-      <div className="fixed bottom-4 right-4 bg-slate-200 border-4 border-black w-60 justify-center p-4 rounded-lg shadow-lg z-50">
+      <div className="fixed bottom-4 right-4 bg-slate-200 border-4 border-black h-26  justify-center p-4 rounded-lg shadow-lg z-50">
   <p className="font-bold">Test it using</p>
   <p><span className='bg-red-300'>Username</span> varshan</p>
   <p><span className='bg-red-300'>Password</span> varshan</p>
