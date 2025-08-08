@@ -1,1 +1,1 @@
-export const BACKED_URL="http://localhost:3000"
+export const BACKED_URL="https://brain-dock-app.onrender.com"
