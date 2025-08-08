@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { BACKED_URL } from "../config";
+
 import axios from "axios";
 export function useContent()
 {
     const [con,setContent]=useState([]);
-
+    const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
     try{
     useEffect(()=>{
 
