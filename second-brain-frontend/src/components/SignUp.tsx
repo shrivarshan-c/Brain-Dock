@@ -6,7 +6,7 @@ import passwordAnimation from "../icons/password.json"
 import { useRef } from "react";
 
 import axios from "axios";
-import { BACKED_URL } from "../config";
+
 import { data, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Navbar } from "./Navbar";
@@ -20,6 +20,7 @@ export function SignUp()
 
   async  function signuoHandle()
     {
+      const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
         try{
             const username=usernameRef.current?.value;
             const password=passwordRef.current?.value;

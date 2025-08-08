@@ -8,11 +8,12 @@ import { SideBar } from "./Sidebar"
 import { useContent } from "./usefetchContent"
 import { Outlet } from "react-router-dom";
 import axios from "axios"
-import { BACKED_URL } from "../config"
+
 import { toast } from "react-toastify"
 
  async function handleshare()
 {
+    const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
     try{
 
 
@@ -21,8 +22,7 @@ import { toast } from "react-toastify"
         { headers:{
             Authorization:localStorage.getItem("token")
         }});
-
-        const hash= findLink.data.message;
+              const hash= findLink.data.message;
 
         const fullLink =`${window.location.origin}/share/${hash}`;
      await  navigator.clipboard.writeText(fullLink)

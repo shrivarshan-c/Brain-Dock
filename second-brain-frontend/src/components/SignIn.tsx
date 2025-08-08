@@ -4,7 +4,7 @@ import { InputBox } from "./createContent";
 import Lottie from "lottie-react";
 import passwordAnimation from "../icons/password.json"
 import { useRef } from "react";
-import { BACKED_URL } from "../config";
+
 import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -18,6 +18,8 @@ export function SignIn()
 
     async  function signInHandle()
     {
+        const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
+
         try{
             const username=usernameRef.current?.value;
             const password=passwordRef.current?.value;

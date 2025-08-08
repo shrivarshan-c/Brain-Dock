@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { BACKED_URL } from "../config";
+
 import { Card } from "./Card";
 import axios from "axios";
 interface ContentItem {
@@ -17,6 +17,7 @@ export const SharedComponent = () => {
   const [content, setContent] = useState<ContentItem[]>([]);
   const [error, setError] = useState<string>("");
 
+  const BACKED_URL= import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     async function fetchData() {
       try {
