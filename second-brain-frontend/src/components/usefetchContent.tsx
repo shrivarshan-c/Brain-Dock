@@ -15,9 +15,7 @@ export function useContent()
         })
 
         .then((res)=>{
-
-             setContent(res.data.content);
-
+             setContent(res.data.content.reverse());
              console.log(res.data.content);
             });
 

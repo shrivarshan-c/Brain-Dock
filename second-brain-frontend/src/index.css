@@ -2,3 +2,348 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Variables ─────────────────────────────────── */
+:root {
+  --bg: #f5f7ff;
+  --surface: #ffffff;
+  --surface-raised: #eef1ff;
+  --text-primary: #0d0f1a;
+  --text-secondary: #4b5280;
+  --accent: #5b5ef4;
+  --accent-glow: rgba(91, 94, 244, 0.25);
+  --border: rgba(0, 0, 0, 0.08);
+  --orb-color-1: rgba(91, 94, 244, 0.12);
+  --orb-color-2: rgba(139, 92, 246, 0.10);
+  --orb-color-3: rgba(99, 102, 241, 0.08);
+  --shadow-float: 0 4px 6px rgba(0,0,0,0.04), 0 20px 40px rgba(0,0,0,0.10), 0 0 0 1px rgba(255,255,255,0.05);
+  --shadow-float-hover: 0 8px 16px rgba(0,0,0,0.06), 0 32px 64px rgba(0,0,0,0.16), 0 0 0 1px rgba(91,94,244,0.12);
+  --grid-color: rgba(91, 94, 244, 0.06);
+}
+
+.dark {
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-raised: #121212;
+  --text-primary: #f0f0f0;
+  --text-secondary: #8a8a8a;
+  --accent: #6b6ef9;
+  --accent-glow: rgba(107, 110, 249, 0.3);
+  --border: rgba(255, 255, 255, 0.12);
+  --orb-color-1: rgba(107, 110, 249, 0.1);
+  --orb-color-2: rgba(167, 139, 250, 0.08);
+  --orb-color-3: rgba(99, 102, 241, 0.05);
+  --shadow-float: 0 4px 6px rgba(0,0,0,0.5), 0 12px 24px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.08);
+  --shadow-float-hover: 0 8px 16px rgba(0,0,0,0.6), 0 24px 48px rgba(0,0,0,0.9), 0 0 0 1px rgba(107,110,249,0.25);
+  --grid-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Base ─────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+/* ── Typography ─────────────────────────────────── */
+.font-display {
+  font-family: 'Instrument Serif', serif;
+}
+.font-mono-bd {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Grid Background ──────────────────────────── */
+.bg-grid {
+  background-image: radial-gradient(circle, var(--grid-color) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+/* ── Floating Card (shared shadow system) ─────── */
+.card-float {
+  box-shadow: var(--shadow-float);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+.card-float:hover {
+  box-shadow: var(--shadow-float-hover);
+  transform: translateY(-6px);
+}
+
+/* ── Shimmer Effect ─────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 60%
+  );
+  background-size: 400px 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.card-shimmer:hover::after {
+  opacity: 1;
+  animation: shimmer 1.2s ease-in-out;
+}
+
+/* ── Accent Button ─────────────────────────── */
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-accent:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px var(--accent-glow), 0 8px 20px rgba(91, 94, 244, 0.3);
+}
+.btn-accent:active {
+  transform: translateY(0);
+}
+
+/* ── Ghost Button ──────────────────────────── */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-ghost:hover {
+  background: var(--surface-raised);
+  transform: translateY(-2px);
+}
+
+/* ── Tag Chip ───────────────────────────── */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: var(--surface-raised);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* ── Surface ───────────────────────────── */
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.surface-raised {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+/* ── Scroll smoothness ─────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ── Selection ─────────────────────────── */
+::selection {
+  background: var(--accent-glow);
+  color: var(--text-primary);
+}
+
+/* ── Focus ring ────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Transition helpers ─────────────────── */
+.transition-colors-300 {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Glassmorphism (CTA section) ─────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+}
+.dark .glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Dashed connector with moving dot ─── */
+@keyframes moveDot {
+  0% { stroke-dashoffset: 200; }
+  100% { stroke-dashoffset: 0; }
+}
+.animated-dash {
+  animation: moveDot 3s linear infinite;
+}
+
+/* ── Particles ──────────────────────────── */
+@keyframes particleRise {
+  0% { transform: translateY(100vh); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+.particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: particleRise linear infinite;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Orbs ──────────────────────────────── */
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -40px) scale(1.06); }
+  66% { transform: translate(-30px, 25px) scale(0.94); }
+}
+@keyframes orbDriftAlt {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-60px, 35px) scale(1.09); }
+  66% { transform: translate(40px, -50px) scale(0.92); }
+}
+@keyframes orbDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(25px, 40px) scale(1.04); }
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+.orb-1 { animation: orbDrift 20s ease-in-out infinite; }
+.orb-2 { animation: orbDriftAlt 26s ease-in-out infinite; }
+.orb-3 { animation: orbDrift3 16s ease-in-out infinite; }
+
+/* ── Hero card float stagger ──────────── */
+@keyframes heroCardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ── Navbar pill scroll shrink ─────────── */
+.navbar-pill {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ── Sidebar active ─────────────────────── */
+.sidebar-item-active {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-raised);
+  color: var(--accent);
+}
+
+/* ── Input focus ───────────────────────── */
+.input-bd {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  outline: none;
+}
+.input-bd::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+.input-bd:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ── Drag handle ───────────────────────── */
+.drag-handle {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: grab;
+}
+.card-float:hover .drag-handle {
+  opacity: 1;
+}
+
+/* ── Mono URL text ─────────────────────── */
+.url-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: -0.02em;
+}
+
+/* ── Step connector dot animation ────── */
+@keyframes dotPulse {
+  0%, 100% { r: 4; opacity: 1; }
+  50% { r: 6; opacity: 0.7; }
+}

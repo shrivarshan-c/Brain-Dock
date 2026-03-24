@@ -8,6 +8,7 @@ import { Youtube } from "./icons/youtube"
 import { YoutubeComponent } from "./components/YoutubeComponent"
 import { TwitterComponent } from "./components/TwitterComponent"
 import { DocumentComponent } from "./components/DocumentComponent"
+import { NoteComponent } from "./components/NoteComponent"
 import { AllContents } from "./components/AllContents"
 import { HomePage } from "./components/HomePage"
 import { SharedComponent } from "./components/sharedComponent"
@@ -39,6 +40,7 @@ return (
     <Route path="youtube" element={<YoutubeComponent/>}/>
     <Route path="twitter" element={<TwitterComponent/>}/>
     <Route path="document" element={<DocumentComponent/>}/>
+    <Route path="note" element={<NoteComponent/>}/>
  </Route>
 <Route path="/share/:shareLink" element={<SharedComponent/>} />
 </Routes>
