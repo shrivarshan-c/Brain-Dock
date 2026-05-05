@@ -80,30 +80,34 @@ return   res.status(409).json({
 
 app.post("/api/v1/content",useMiddleware,async(req,res)=>{
 
-    const type=req.body.type;
-    const link=req.body.link;
-    const title=req.body.title;
-    const description=req.body.description;
-    const tags=req.body.tags;
+    try {
+        const type=req.body.type;
+        const link=req.body.link;
+        const title=req.body.title;
+        const description=req.body.description || "";
+        const tags=req.body.tags;
 
+        const createContent= await ContentModel.create({
+            type:type,
+            link:link,
+            title:title,
+            description:description,
+            tags:[],
+            //@ts-ignore
+            userId:req.userId
+        })
 
-    const createContent= await ContentModel.create({
-        type:type,
-        link:link,
-        title:title,
-        description:description,
-        tags:[],
-        //@ts-ignore
-        userId:req.userId
-    })
-
-    if(createContent)
-    {
-        res.status(200).json({"mesage":"contents added successfully"})
-    }
-    else
-    {
-        res.status(404).json({"message":"content not added"});
+        if(createContent)
+        {
+            res.status(200).json({"mesage":"contents added successfully"})
+        }
+        else
+        {
+            res.status(404).json({"message":"content not added"});
+        }
+    } catch (e: any) {
+        console.error("Error creating content:", e);
+        res.status(500).json({"message": e.message});
     }
 })
 
